@@ -23,4 +23,4 @@ const readRepositories = async () => {
     return result.rows;
 };
 
-module.exports = { getUsers };
+module.exports = { pool };
