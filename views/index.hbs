@@ -1,0 +1,13 @@
+{{> head}}
+
+<h1>Saved repositories</h1>
+
+{{#if repositories.length}}
+    <div>
+    {{#each repositories}}
+        {{> repo }}
+    {{/each}}
+    </div>
+{{else}}
+    <h3>No saved repositories yet.</h3>
+{{/if}}

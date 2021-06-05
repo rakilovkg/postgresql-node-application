@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col s12 m6">
+        <div class="card blue darken-2">
+            <div class="card-content white-text">
+                <span class="card-title">{{ author }} / <a class="white-text text-darken-2" href={{ link }}>{{ title }}</a></span>
+                <p>{{ descr }}</p>
+                <span>{{ lang }}</span>
+                <br>
+                <span>Stars: {{ stars }}</span>
+            </div>
+            <div class="card-action">
+                {{#if id}}
+                <form action="/delete" method="POST">
+                    <input type="hidden" value={{id}} name="id">
+                    <button class="btn btn-small" type="submit">DELETE</button>
+                </form>
+                {{else}}
+                <form action="/save" method="POST">
+                    <input type="hidden" value={{title}} name="title">
+                    <input type="hidden" value={{author}} name="author">
+                    <input type="hidden" value={{lang}} name="lang">
+                    <input type="hidden" value={{descr}} name="descr">
+                    <input type="hidden" value={{stars}} name="stars">
+                    <button class="btn btn-small" type="submit">SAVE</button>
+                </form>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>

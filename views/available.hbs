@@ -1,0 +1,11 @@
+{{> head}}
+
+<h1>Available repositories</h1>
+
+{{#if repositories.length}}
+    <ul>
+        {{#each repositories}}
+            {{> repo this }}
+        {{/each}}
+    </ul>
+{{/if}}
