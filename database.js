@@ -1,26 +1,28 @@
 const { Pool } = require('pg')
 
 const pool = new Pool({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    database: process.env.DB_DATABASE,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD
+    host: String(process.env.DB_HOST),
+    port: Number(process.env.DB_PORT),
+    database: String(process.env.DB_DATABASE),
+    user: String(process.env.DB_USER),
+    password: String(process.env.DB_PASSWORD)
 })
 
-pool.connect()
-
-const createRepository = async () => {
-
+const createRepository = async (title, author, lang, descr, stars) => {
+    await pool.query(`INSERT INTO repositories(title, author, lang, descr, stars) VALUES('${title}', '${author}', '${lang}', '${descr}', ${stars});`)
 };
 
-const updateRepository = async (id) => {
-
+const deleteRepository = async (id) => {
+    await pool.query(`DELETE FROM repositories WHERE id = ${id};`)
 };
 
-const readRepositories = async () => {
-    const result = await pool.query('SELECT * FROM repositories;')
-    return result.rows;
+const getRepositories = async () => {
+    try {
+        const result = await pool.query('SELECT * FROM repositories;')
+        return result.rows
+    } catch(error) {
+        console.log(error)
+    }
 };
 
-module.exports = { pool };
+module.exports = { pool, createRepository, getRepositories, deleteRepository };
